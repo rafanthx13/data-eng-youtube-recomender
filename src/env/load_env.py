@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-load_dotenv() # Load from './.env
+load_dotenv() # Load from './.env'; Nao se usa aspas no '.env' para especificar string
 
 TEST_ENV = os.getenv('DB_HOST') # Retorna None se nao encontrar
 
