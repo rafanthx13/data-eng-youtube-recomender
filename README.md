@@ -2,4 +2,6 @@
 
 API Flask with ML Model
 
-Deploy from heroku on 'main' branch. EXE
+Deploy from heroku on 'main' branch. 
+
+Heroku Deploy when thre is a push on branch 'heroku'
