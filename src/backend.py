@@ -1,5 +1,3 @@
-
-
 from extract_data import *
 from ml_functions import *
 from db import DataBase

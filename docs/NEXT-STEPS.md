@@ -1,12 +1,28 @@
-# Next Steps
+# Next Steps/Features
 
-+ 1. Subir no Heroku
-+ 2. Adicionar a data de publicaçao no video
-   - mexer nno date do sql e na aprte de salvar dados do video
-+ 3. Adicionar Gostei na seçâo do Front End (usar para)
-+ 4. Listar o resultado de cada etapa
-+  - (o json gerado, pois vou ter que saber para os proxcimos passos)
+**Alterar Dataset**
++ Adicionar a data de publicação 
++ Adicionar tamanho do vídeos em segundos 
++ Usar Scapy ou outro NLP para saber a linguagem dos títulos dos vídeos e isso se tornar uma variável categórica 
 
-Melhorar modelo de ML
-+ 1. Usar Scapy para definir a linaguagem e ser isso uma feature
-+ 2. Tamanho do vídeo como feature
+**DataBase**
++ Adicionar a data em que o vídeo é inserido no bancod e dados
+
+**Machine Learning**
++ Testar outros método de Ml
++ Testar outra forma de tokenização/vetorização de texto
++ Excluir vídeos com caracteres de outras línguas na vetorização
++ Testar DeepLearinig
++ Teste com novas features (data de publicação. tamanho dos vídeos)
+
+**FrontEnd**
++ Botão para da o like e registrar no DB
+
+**BackEnd**
++ Swagger para python (documentar uso da API)
++ A home (get::'/') pode mostrar algo melhor
++ `/update-db` pode ter parâmetros para adicionar mais vídeos
++ Criaçâo de rota `/predict` para predizer por link de um vídeo
+
+
+
