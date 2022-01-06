@@ -32,9 +32,9 @@ Ativar ambiente (deve aparecer env no terminal)
 
 ````sh
 # linux/mac
-source env/bin/activate (Linux ou macOS)
+source venv/bin/activate (Linux ou macOS)
 # windows
-env/Scripts/Activate (Windows)
+venv/Scripts/Activate (Windows)
 ````
 
 Desativar ambiente
