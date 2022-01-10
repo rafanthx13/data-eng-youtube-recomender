@@ -13,7 +13,7 @@ CORS(app)
 
 @app.route("/")
 def helloWorld():
-  return "Hello, cross-origin-world!"
+  return "Hello, cross-origin-world! <br> /show-videos ; /update-db"
 
 @app.route("/show-videos")
 def get_videos():
@@ -25,10 +25,12 @@ def get_videos():
 # Update Database, Cost long time
 @app.route('/update-db')
 def update_database():
-  result, status, time_cost = backend.update_db()
-  msg, http_status =  ('success', 201) if status else ('failed', 401)
+  result, status, time_cost, duplicate_videos_count = backend.update_db()
+  status, http_status =  ('success', 201) if status else ('failed', 401)
   return jsonify(
-    { 'status': msg, 'count': result, 'time_cost': time_cost}), http_status
+    { 'status': status,
+      'msg': f"add {result} videos and {duplicate_videos_count} duplicates",
+      'time_cost': time_cost}), http_status
 
 # app name
 @app.errorhandler(404)

@@ -49,8 +49,10 @@ def update_db():
     t0 = time.time()
     http_status = False
     count_records = 0
-    queries = ['data+engineering', 'data+pipeline', "airflow"]
-    number_of_videos = 5
+    duplicate_videos_count = 0
+    # queries = ['data+engineering', 'data+pipeline', "airflow"]
+    queries = ['data+lake'] ## para testar novos dados
+    number_of_videos = 7
     try:
         database = DataBase()
         for query in queries:
@@ -67,6 +69,8 @@ def update_db():
                 print('SEM VIDEOS')
                 continue
             print_debug(new_id_videos, 'new_id_videos')
+            # Calculate Duplicate Videos
+            duplicate_videos_count = len(id_videos) - len(new_id_videos)
             # Para cade video novo
             for video in new_id_videos:
                 # Busco seus dados
@@ -80,7 +84,8 @@ def update_db():
                     "score": float(proba),
                     "video_id": video_id,
                     "thumbnail": video_data['thumbnail'],
-                    'update_time': time.time_ns()
+                    'update_time': time.time_ns(),
+                    'upload_date': video_data['upload_date']
                     }
                 # Salvo no banco
                 database.save_recomendation(data_front)
@@ -88,9 +93,9 @@ def update_db():
         http_status = True
 
     except Exception as e:
-        print('======\n\n', e, '\n\n========')
+        print('====== Error ======\n\n', e, '\n\n========')
         raise Exception('Internal Server Error\n\n', e)
         
     finally:
         database.close()
-        return count_records, http_status, time_spent(t0)
+        return count_records, http_status, time_spent(t0), duplicate_videos_count

@@ -40,7 +40,7 @@ class DataBase:
 
     def show_videos(self, qtd_videos = 20):
         """ Return list of videos for Front End """
-        query = '''SELECT id, video_title, video_link, thumbnail, score, liked FROM {TABLE_NAME}
+        query = '''SELECT id, video_title, video_link, thumbnail, score, liked, created_at, upload_date FROM {TABLE_NAME}
                     ORDER BY score DESC LIMIT {qtd_videos}'''
         query = query.format(TABLE_NAME=self.TABLE_NAME, qtd_videos=qtd_videos)
         videos = self.execute_query(query)
@@ -77,13 +77,18 @@ class DataBase:
         video_link = video_info['video_id']
         thumbnail = video_info['thumbnail']
         score = video_info['score']
+        upload_date = str(video_info['upload_date'])
+        print('upload_date ==', upload_date, '== upload_date')
 
+        # Adicionar novas tabelas
+        ## 1; Se for texto STRING, ponha entre aspas simples ';
+        ## 2; insere na query e na linha de baixo, em 'INSERT INTO' e em 'query.format'
         query = '''
-        INSERT INTO {TABLE_NAME} (video_title, video_link, thumbnail, score) 
-        VALUES ('{video_title}', '{video_link}', '{thumbnail}', {score});
+        INSERT INTO {TABLE_NAME} (video_title, video_link, thumbnail, score, upload_date) 
+        VALUES ('{video_title}', '{video_link}', '{thumbnail}', {score}, '{upload_date}');
         '''
         query = query.format(TABLE_NAME=self.TABLE_NAME, video_link=video_link,
-        thumbnail=thumbnail, score=score, video_title=video_title)
+        thumbnail=thumbnail, score=score, video_title=video_title, upload_date=upload_date)
         self.cur.execute(query)
         self.conn.commit()
         count = self.cur.rowcount
